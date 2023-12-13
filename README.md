@@ -15,5 +15,5 @@
     - [midi_encoder.v](midi_encoder.v): Takes in the MIDI files and encodes them into the note values in the FPGA
     - [uart_tx.v](uart_tx.v): Accesses other files which can modify audio and encodes them into the FPGA. Currently not functional and without external files it is not accessed by the final code.
   - [pitchshifter.v](pitchshifter.v): Module that accesses the arrow key inputs and increases or decreases the pitch depending on which key is pressed.
-  - [usb_keyboard.v](usb_keyboard.v): Top level module that accesses the ps2 data and transmits signals into the keyboard, as well as taking input signals from the keyboard.
+  - [usb_keyboard.v](usb_mouse.v): Top level module that accesses the ps2 data and transmits signals into the keyboard, as well as taking input signals from the keyboard.
     - [ps2_transmitter.v](ps2_transmitter.v): Sends data directly through the connection to the keyboard, does not decode any of the data sent though. 
