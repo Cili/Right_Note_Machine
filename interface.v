@@ -6,7 +6,7 @@ module interface (
     input rec,
     input pitchUP,
     input pitchDown,
-    input  rst, //pitch reset
+    input rst, //pitch reset
 
     // UART port
     inout USB_CLOCK,
@@ -27,22 +27,34 @@ module interface (
     wire [3:0] s;
     wire k,m;
     
-    
     // button input
     wire btnUP, btnDOWN, btnREC, btnMODE;
     wire [4:0] pitchshift;
+
     btn_dbc bDOWN (.btn_in(pitchDOWN), .btn(btnDOWN), .rst(rst), .clk(clk), .ena(x));
     btn_dbc bUP (.btn_in(pitchUP), .btn(btnUP), .rst(rst), .clk(clk), .ena(x));
     btn_dbc bMODE (.btn_in(mode), .btn(btnMODE), .rst(rst), .clk(clk), .ena(x));
-    
+   
     pitchshifter p0 (.btnl(btnDOWN), .btnr(btnUP), .pitchshift(pitchshift), .clk(clk), .rst(rst));
+
+    parameter playState = 0, recordState = 1, playbackState = 2;
+    
+    initial present_state = playState;
+   
+    
+   always @(rst or btnREC or btnMODE)
+        case(present_state)
+           playState: if(btnREC)               next_state <= recordState;
+               else if(btnMODE)         next_state <= playbackState;
+               else                     next_state <= playState;
+            recordState: begin temp_out <= in[p];      next_state <= S2; end
+           playbackState: begin p <= p+1;            next_state <= S0; end
+    
+    always @(posedge clk) begin
+        present_state<=next_state;
+    end
     
     wire [9:0] rnote;
-    wire[9:0] dnote;  
-    
-    
-
-    
     wire [9:0] Note;
     wire [4:0] Pitchshift;// Synthesised output consider the keys are played together will stored music
     
