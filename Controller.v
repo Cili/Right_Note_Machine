@@ -1,10 +1,10 @@
 module Controller(
     input clk,
-    input [9:0]rawnote,//Inputs£¬using JA 1~4&8 JxADC 1~4 & 8 pin£¨We will use keyboard£©
+    input [9:0]rawnote,//Inputsï¼Œusing JA 1~4&8 JxADC 1~4 & 8 pinï¼ˆWe will use keyboardï¼‰
     input Echo,// for ultrasound mod
     output trig,
     input keysel,//input mode of the key, 0 for ultra sound 
-    input knob_in, // knob tuning volume(XADC 1¿Ú)
+    input knob_in, // knob tuning volume(XADC port1)
     /*input [7:0] volume,*/ // Volume input TBD
     /*input [7:0] modulation,*/ // PWM input TBD
     input btnl_in,
@@ -19,7 +19,7 @@ module Controller(
     // UART port
     inout             USB_CLOCK,
     inout             USB_DATA,
-    input             mode,//mod selection£¬0 manual play£¬1 automatic play
+    input             mode,//mod selectionï¼Œ0 manual playï¼Œ1 automatic play
     input             autospeed,// auto mode speed
     input             [2:0]songselect,
     input              cycle,// play one sound
@@ -53,7 +53,7 @@ module Controller(
     wire knob_ena, knob_gnd;
     assign knob_ena = 1;
     assign knob_gnd = 0;
-    adc (.clk(clk), .data_out(knob_data), .ena(knob_ena), .vauxp6(knob_in), .vauxn6(knob_gnd)); // ÐýÅ¥ÊäÈë
+    adc (.clk(clk), .data_out(knob_data), .ena(knob_ena), .vauxp6(knob_in), .vauxn6(knob_gnd)); // æ—‹é’®è¾“å…¥
     assign volume = knob_data[15:8];
     
     // button input
@@ -66,7 +66,7 @@ module Controller(
     pitchshifter (.btnl(btnl), .btnr(btnr), .pitchshift(pitchshift), .clk(clk), .rst(rst));
     
     
-    wire [9:0]rnote;wire[9:0]dnote;reg ksel = 0;//1 ultrasound£¬0 keyboard    
+    wire [9:0]rnote;wire[9:0]dnote;reg ksel = 0;//1 ultrasoundï¼Œ0 keyboard    
     distance S0(.s_clk(clk),.s_rst_n(ksel),.trig(trig),.Echo(Echo),.note(dnote));
     ena X0 (.clk(clk),.pulse1(x),.pulse2(y),.pulse3(z));//x is diplayed,y120bpm,z60bpm
 always@(posedge clk) begin
