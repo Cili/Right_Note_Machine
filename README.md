@@ -1,6 +1,7 @@
 # Right_Note_Machine
 - **Team Members:** Jon Cili, Xingjian Jiang, Raphael Mok
-- **Demo Video Link:**
+- **Demo Video Link:** https://drive.google.com/drive/folders/11A1SHO1mGmDlg9j-xsYX-SH7_U4Lv7an?usp=share_link
+- **Bilibili Link:** https://www.bilibili.com/video/BV15i4y1x7rV/?buvid=Z446DE4F5D19E79547E1916B7B653B96CA57&from_spmid=playlist.playlist-detail.0.0&is_story_h5=false&mid=0tJnQDyRk9UJ1LwnzxPIaw%3D%3D&p=1&plat_id=116&share_from=ugc&share_medium=iphone&share_plat=ios&share_session_id=6B471C3E-DE0D-4902-9C5D-DF0D96469443&share_source=COPY&share_tag=s_i&spmid=main.ugc-video-detail.0.0&timestamp=1701545554&unique_k=vdNTFpN&up_id=12619366
 - **Overview:** Our project seeks to create a digital musical keyboard using a computer's keyboard as well as an FPGA, while also allowing for the user to save a series of notes and their length for future use.
 - **How to Run:** To run the user simply has to generate the bitstream and upload it to the FPGA and computer. From there, the keyboard should immediately work to generate notes from the user's input.
 - ## **Code Structure Overview:**
